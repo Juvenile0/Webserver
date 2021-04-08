@@ -7,7 +7,7 @@
 #include<map>
 namespace webserver{
     
-class TimeManager;
+class heap_timer;
 class Buffer;
 class Request
 {
@@ -39,6 +39,8 @@ public:
     void setnowworking(){workstatus_ = false;};
     bool getworkstatus(){return workstatus_;};
 
+    void setTimer(heap_timer* timer) { tmanager_ = timer; }
+    heap_timer*  getTimer() { return tmanager_; }
 
     std::string getUrl() const { return url_; }
     std::string getUrlargs() const { return urlargs_; }
@@ -50,7 +52,7 @@ private:
     Buffer inBuffer_;   //fd->buffer    request
     Buffer outBuffer_;  // buffer->fd  response
 
-    TimeManager* tmanager_;
+    heap_timer* tmanager_;
     bool workstatus_;   //是否处于工作状态
 
     /* http属性 */    
